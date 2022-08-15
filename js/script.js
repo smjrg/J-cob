@@ -6,6 +6,8 @@ snake[0] = {
     x: 8 * box,
     y: 8 * box
 }
+let direction = "right";
+
 
 function criarBG() {
     context.fillStyle = "Lightgreen";
@@ -18,5 +20,29 @@ function criarCobrinha() {
         context.fillRect(snake[i].x, snake[i].y, box, box);
     }
 }
-criarBG();
-criarCobrinha();
+
+function iniciarJogo() {
+    criarBG();
+    criarCobrinha();
+
+    let snakex = snake[0].x;
+    let snakey = snake[0].y;
+
+    if(direction == "right") snakex += box;
+    if(direction == "left") snakey -= box;
+    if(direction == "up") snakey -= box;
+    if(direction == "down") snakey += box;
+
+    snake.pop();
+
+    let newHead = {
+        x: snakex,
+        y: snakey
+    }
+
+    snake.unshift(newHead);
+
+    
+}
+
+let jogo = setInterval(iniciarJogo, 100);
